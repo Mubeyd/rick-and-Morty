@@ -1,13 +1,8 @@
-import React from 'react';
-import { View } from 'react-native';
-import MainScreen from './src/screens/MainScreen';
+import React from 'react'
+import MainScreen from './src/screens/MainScreen'
 
 const App = () => {
-  return (
-    <View>
-      <MainScreen />
-    </View>
-  );
-};
+  return <MainScreen />
+}
 
-export default React.memo(App);
+export default React.memo(App)
