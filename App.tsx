@@ -1,8 +1,8 @@
 import React from 'react'
-import MainScreen from './src/screens/MainScreen'
+import RootStackScreen from './src/navigation/RootStackScreen'
 
 const App = () => {
-  return <MainScreen />
+  return <RootStackScreen />
 }
 
 export default React.memo(App)

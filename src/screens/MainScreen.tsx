@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import React, { useCallback, useEffect, useState } from 'react'
 import {
   ActivityIndicator,
@@ -12,6 +13,8 @@ import { episodeApi } from '../constants/constants'
 import { IEpisode, IInfo } from '../interfaces/episode'
 
 const MainScreen = () => {
+  const { navigate } = useNavigation()
+
   const [isLoading, setLoading] = useState(true)
   const [api, setApi] = useState<string | null>(episodeApi)
   const [results, setResults] = useState<IEpisode[]>([])
@@ -45,7 +48,7 @@ const MainScreen = () => {
   }, [api])
 
   const onPress = useCallback(() => {
-    console.log('1111 :>> ', 1111)
+    navigate({ name: 'EpisodeDetailsScreen' })
   }, [])
 
   const keyExtractor = useCallback((item) => item.id, [])
@@ -72,8 +75,7 @@ const MainScreen = () => {
           <Button title="Previous" disabled={!info?.prev} onPress={onPrev} />
         </View>
         <View style={styles.nextButton}>
-
-        <Button title="Next" disabled={!info?.next} onPress={onNext} />
+          <Button title="Next" disabled={!info?.next} onPress={onNext} />
         </View>
       </View>
     </View>
