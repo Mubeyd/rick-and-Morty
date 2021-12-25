@@ -8,6 +8,7 @@ import {
   Text,
   View,
 } from 'react-native'
+import Divider from '../components/Divider'
 import Episode from '../components/Episode'
 import { backgroundColor } from '../constants/colors'
 import { episodeApi } from '../constants/constants'
@@ -59,19 +60,12 @@ const MainScreen = () => {
     [],
   )
 
-  // if (isLoading) {
-  //   return (
-  //     <View style={styles.activityIndicator}>
-  //       <ActivityIndicator size="large" />
-  //     </View>
-  //   )
-  // }
-
   return (
     <View style={styles.container}>
       <View style={styles.headerView}>
         <Text style={styles.headerText}>Rick Morty Episodes List</Text>
       </View>
+
       {isLoading ? (
         <View style={styles.activityIndicator}>
           <ActivityIndicator size="large" />
@@ -85,6 +79,9 @@ const MainScreen = () => {
           />
         </View>
       )}
+
+      <Divider widthRatio={1} />
+
       <View style={styles.bottomView}>
         <View style={styles.previousButton}>
           <Button title="Previous" disabled={!info?.prev} onPress={onPrev} />
