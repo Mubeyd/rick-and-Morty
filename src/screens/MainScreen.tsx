@@ -10,7 +10,8 @@ import {
 import Episode from '../components/Episode'
 import { backgroundColor } from '../constants/colors'
 import { episodeApi } from '../constants/constants'
-import { IEpisode, IInfo } from '../interfaces/episode'
+import { IEpisode } from '../interfaces/IEpisode'
+import { IInfo } from '../interfaces/IInfo'
 
 const MainScreen = () => {
   const { navigate } = useNavigation()

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { screenWidth } from '../constants/sizes'
-import { IEpisode } from '../interfaces/episode'
+import { IEpisode } from '../interfaces/IEpisode'
 
 interface Props {
   episode: IEpisode
