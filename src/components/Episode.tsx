@@ -37,13 +37,14 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     width: screenWidth / 1.2,
-    backgroundColor: '#abd2ff',
+    backgroundColor: '#ADD3FF',
     borderRadius: 4,
     marginVertical: 4,
   },
   name: {
     fontSize: 14,
     margin: 2,
+    color: '#363738'
   },
   air_date: {
     fontSize: 14,

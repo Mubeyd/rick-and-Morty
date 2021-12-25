@@ -1,17 +1,29 @@
 import { useRoute } from '@react-navigation/native'
-import React, { useMemo } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import moment from 'moment'
+import React, { useEffect, useMemo, useState } from 'react'
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import { IEpisode } from '../interfaces/IEpisode'
-import moment from "moment";
 
 const EpisodeDetailsScreen = () => {
   const { params, name, key } = useRoute()
+
+  const [isLoading, setLoading] = useState(true)
 
   const item = useMemo(() => params?.item as IEpisode, [])
 
   console.log('item :>> ', item)
   console.log('name :>> ', name)
   console.log('key :>> ', key)
+
+  useEffect(() => {
+    if (!!item) {
+      setLoading(false)
+    }
+  }, [])
+
+  if (isLoading) {
+    return <ActivityIndicator size="large" />
+  }
   return (
     <View>
       <View style={styles.textView}>
@@ -26,7 +38,9 @@ const EpisodeDetailsScreen = () => {
 
       <View style={styles.textView}>
         <Text style={styles.rowText}>CreatedAt: </Text>
-        <Text style={styles.rowText}>{moment(item.created).format("MMM Do YY")}</Text>
+        <Text style={styles.rowText}>
+          {moment(item.created).format('MMM Do YY')}
+        </Text>
       </View>
     </View>
   )

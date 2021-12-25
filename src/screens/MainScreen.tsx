@@ -5,13 +5,16 @@ import {
   Button,
   FlatList,
   StyleSheet,
+  Text,
   View,
 } from 'react-native'
 import Episode from '../components/Episode'
 import { backgroundColor } from '../constants/colors'
 import { episodeApi } from '../constants/constants'
+import { screenHeight } from '../constants/sizes'
 import { IEpisode } from '../interfaces/IEpisode'
 import { IInfo } from '../interfaces/IInfo'
+import { getMoviesAsync } from '../services/getMovies'
 
 const MainScreen = () => {
   const { navigate } = useNavigation()
@@ -21,30 +24,26 @@ const MainScreen = () => {
   const [results, setResults] = useState<IEpisode[]>([])
   const [info, setInfo] = useState<IInfo>()
 
-  const getMovies = async (_api: string) => {
-    try {
-      const response = await fetch(_api)
-      const json = await response.json()
-      setResults(json.results)
-      setInfo(json.info)
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
   const onNext = useCallback(() => {
+    setLoading(true)
     setApi(info?.next as string)
   }, [info?.next, info?.prev])
 
   const onPrev = useCallback(() => {
+    setLoading(true)
     setApi(info?.prev as string)
   }, [info?.prev])
 
   useEffect(() => {
     if (api) {
-      getMovies(api)
+      getMoviesAsync({
+        _api: api,
+        fn: (json) => {
+          setResults(json.results)
+          setInfo(json.info)
+        },
+        loadingFn: () => setLoading(false),
+      })
     }
   }, [api])
 
@@ -60,17 +59,32 @@ const MainScreen = () => {
     [],
   )
 
-  if (isLoading) {
-    return <ActivityIndicator size="large" />
-  }
+  // if (isLoading) {
+  //   return (
+  //     <View style={styles.activityIndicator}>
+  //       <ActivityIndicator size="large" />
+  //     </View>
+  //   )
+  // }
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={results}
-        keyExtractor={keyExtractor}
-        renderItem={renderItem}
-      />
+      <View style={styles.headerView}>
+        <Text style={styles.headerText}>Rick Morty Episodes List</Text>
+      </View>
+      {isLoading ? (
+        <View style={styles.activityIndicator}>
+          <ActivityIndicator size="large" />
+        </View>
+      ) : (
+        <View style={{ height: screenHeight / 1.4 }}>
+          <FlatList
+            data={results}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+          />
+        </View>
+      )}
       <View style={styles.bottomView}>
         <View style={styles.previousButton}>
           <Button title="Previous" disabled={!info?.prev} onPress={onPrev} />
@@ -100,11 +114,23 @@ const styles = StyleSheet.create({
     height: 64,
     margin: 8,
     alignItems: 'baseline',
+    position: 'absolute',
+    bottom: 0,
   },
   previousButton: {
     marginHorizontal: 12,
   },
   nextButton: {
     marginHorizontal: 12,
+  },
+  headerView: {
+    margin: 8,
+  },
+  headerText: {
+    fontSize: 18,
+    color: '#000',
+  },
+  activityIndicator: {
+    margin: 48,
   },
 })
