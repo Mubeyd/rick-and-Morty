@@ -48,8 +48,8 @@ const MainScreen = () => {
     }
   }, [api])
 
-  const onPress = useCallback(() => {
-    navigate({ name: 'EpisodeDetailsScreen' })
+  const onPress = useCallback((item: IEpisode) => {
+    navigate('EpisodeDetailsScreen' as never, { item: item })
   }, [])
 
   const keyExtractor = useCallback((item) => item.id, [])

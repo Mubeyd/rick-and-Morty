@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { screenWidth } from '../constants/sizes'
 import { IEpisode } from '../interfaces/IEpisode'
 
 interface Props {
   episode: IEpisode
-  onPress: () => void
+  onPress: (item: IEpisode) => void
 }
 
 const Episode = (props: Props) => {
   const { episode, onPress } = props
 
+  const onPressCb = useCallback(
+    () => {
+      onPress(episode)
+      
+    },
+    [],
+  )
+
   return (
     <TouchableOpacity
-      onPress={onPress}
+      onPress={onPressCb}
       style={styles.container}
       activeOpacity={0.6}>
       <Text style={styles.name}>{episode.name}</Text>
