@@ -14,6 +14,7 @@
   "dependencies": {
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+    "eslint-plugin-react-hooks": "^4.2.1-rc.0-next-3dc41d8a2-20211223",
     "expo": "^44.0.1",
     "expo-keep-awake": "^10.0.1",
     "moment": "^2.29.1",

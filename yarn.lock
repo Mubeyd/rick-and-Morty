@@ -3366,6 +3366,11 @@ eslint-plugin-react-hooks@^4.0.4:
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.3.0.tgz#318dbf312e06fab1c835a4abef00121751ac1172"
   integrity sha512-XslZy0LnMn+84NEG9jSGR6eGqaZB3133L8xewQo3fQagbQuGt7a63gf+P1NGKZavEYEC3UXaWEAA/AqDkuN6xA==
 
+eslint-plugin-react-hooks@^4.2.1-rc.0-next-3dc41d8a2-20211223:
+  version "4.2.1-rc.0-next-3dc41d8a2-20211223"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.2.1-rc.0-next-3dc41d8a2-20211223.tgz#3cce70ed174b6ad761687f26eba7d3499fa68ff7"
+  integrity sha512-TKOkwd8cEiYHWdDjRHHyxLptEmWIE80OMtIfQvnTxZoEm4TQAp5UGWQfvUcKP47V1sCWhBUpNadh70Gj2Dz/ag==
+
 eslint-plugin-react-native-globals@^0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-native-globals/-/eslint-plugin-react-native-globals-0.1.2.tgz#ee1348bc2ceb912303ce6bdbd22e2f045ea86ea2"

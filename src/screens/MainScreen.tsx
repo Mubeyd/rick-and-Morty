@@ -74,7 +74,7 @@ const MainScreen = () => {
     ({ item }: { item: IEpisode }) => (
       <Episode key={item.name} episode={item} onPress={onPress} />
     ),
-    [],
+    [onPress],
   )
 
   return (
