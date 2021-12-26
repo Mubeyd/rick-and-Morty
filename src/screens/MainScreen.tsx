@@ -8,7 +8,6 @@ import {
   Text,
   View,
 } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import Divider from '../components/Divider'
 import Episode from '../components/Episode'
 import { backgroundColor } from '../constants/colors'
@@ -17,8 +16,6 @@ import { screenHeight } from '../constants/sizes'
 import { IEpisode } from '../interfaces/IEpisode'
 import { IInfo } from '../interfaces/IInfo'
 import { getMoviesAsync } from '../services/getMovies'
-
-const myIcon = <Icon name="rocket" size={30} color="#900" />
 
 const MainScreen = () => {
   const { navigate } = useNavigation()
@@ -67,7 +64,6 @@ const MainScreen = () => {
     <View style={styles.container}>
       <View style={styles.headerView}>
         <Text style={styles.headerText}>Rick Morty Episodes List</Text>
-        <Icon name="taxi" size={30} color="#900" />
       </View>
 
       {isLoading ? (

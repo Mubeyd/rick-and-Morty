@@ -6,7 +6,7 @@ import MainScreen from '../screens/MainScreen'
 
 const RootStack = createNativeStackNavigator()
 
-const RootStackScreen = (navigation: any) => (
+const RootStackScreen = () => (
   <NavigationContainer>
     <RootStack.Navigator initialRouteName="MainScreen">
       <RootStack.Screen
@@ -18,7 +18,7 @@ const RootStackScreen = (navigation: any) => (
       <RootStack.Screen
         name="MainScreen"
         component={MainScreen}
-        options={{ title: 'Main Screen', headerShown: true }}
+        options={{ title: 'Main Screen', headerShown: false }}
       />
     </RootStack.Navigator>
   </NavigationContainer>

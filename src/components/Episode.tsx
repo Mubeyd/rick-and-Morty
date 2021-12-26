@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { screenWidth } from '../constants/sizes'
 import { IEpisode } from '../interfaces/IEpisode'
 
@@ -11,22 +12,24 @@ interface Props {
 const Episode = (props: Props) => {
   const { episode, onPress } = props
 
-  const onPressCb = useCallback(
-    () => {
-      onPress(episode)
-      
-    },
-    [],
-  )
+  const onPressCb = useCallback(() => {
+    onPress(episode)
+  }, [])
 
   return (
     <TouchableOpacity
       onPress={onPressCb}
       style={styles.container}
       activeOpacity={0.6}>
-      <Text style={styles.name}>{episode.name}</Text>
-      <Text style={styles.air_date}>{episode.air_date}</Text>
-      <Text style={styles.air_date}>{episode.episode}</Text>
+      <View style={styles.leftSideView}>
+        <Text style={styles.episodeId}>{episode.id}</Text>
+        <MaterialCommunityIcons name="movie-filter" size={12} />
+      </View>
+      <View>
+        <Text style={styles.name}>{episode.name}</Text>
+        <Text style={styles.air_date}>{episode.air_date}</Text>
+        <Text style={styles.air_date}>{episode.episode}</Text>
+      </View>
     </TouchableOpacity>
   )
 }
@@ -35,19 +38,28 @@ export default React.memo(Episode)
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     width: screenWidth / 1.2,
-    backgroundColor: '#ADD3FF',
+    backgroundColor: '#CCE4FF',
     borderRadius: 4,
     marginVertical: 4,
+    alignItems: 'center',
   },
   name: {
     fontSize: 14,
     margin: 2,
-    color: '#363738'
+    color: '#363738',
+  },
+  episodeId: {
+    fontSize: 14,
+    // margin: 2,
+    color: '#363738',
   },
   air_date: {
     fontSize: 14,
     margin: 2,
+  },
+  leftSideView: {
+    margin: 6,
   },
 })
