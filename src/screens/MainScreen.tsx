@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   ActivityIndicator,
   Button,
@@ -8,11 +8,12 @@ import {
   Text,
   View,
 } from 'react-native'
+import { Searchbar } from 'react-native-paper'
 import Divider from '../components/Divider'
 import Episode from '../components/Episode'
 import { backgroundColor } from '../constants/colors'
 import { episodeApi } from '../constants/constants'
-import { screenHeight } from '../constants/sizes'
+import { screenHeight, screenWidth } from '../constants/sizes'
 import { IEpisode } from '../interfaces/IEpisode'
 import { IInfo } from '../interfaces/IInfo'
 import { getMoviesAsync } from '../services/getMovies'
@@ -24,6 +25,22 @@ const MainScreen = () => {
   const [api, setApi] = useState<string | null>(episodeApi)
   const [results, setResults] = useState<IEpisode[]>([])
   const [info, setInfo] = useState<IInfo>()
+
+  const [searchQuery, setSearchQuery] = useState<string>('')
+
+  const onChangeSearch = useCallback((val: string) => {
+    setSearchQuery(val)
+  }, [])
+
+  const data = useMemo(
+    () =>
+      searchQuery.trim() !== ''
+        ? results.filter((x) =>
+            x.name.toLowerCase().includes(searchQuery.toLowerCase()),
+          )
+        : results,
+    [searchQuery, results],
+  )
 
   const onNext = useCallback(() => {
     setLoading(true)
@@ -64,6 +81,12 @@ const MainScreen = () => {
     <View style={styles.container}>
       <View style={styles.headerView}>
         <Text style={styles.headerText}>Rick Morty Episodes List</Text>
+        <Searchbar
+          placeholder="Search"
+          onChangeText={onChangeSearch}
+          value={searchQuery}
+          style={{ marginVertical: 8, width: screenWidth / 1.6 }}
+        />
       </View>
 
       {isLoading ? (
@@ -71,9 +94,9 @@ const MainScreen = () => {
           <ActivityIndicator size="large" />
         </View>
       ) : (
-        <View style={{ height: screenHeight / 1.4 }}>
+        <View style={{ height: screenHeight / 1.4, position: 'relative' }}>
           <FlatList
-            data={results}
+            data={data}
             keyExtractor={keyExtractor}
             renderItem={renderItem}
           />
@@ -111,7 +134,7 @@ const styles = StyleSheet.create({
     height: 64,
     margin: 8,
     alignItems: 'baseline',
-    position: 'absolute',
+    position: 'relative',
     bottom: 0,
   },
   previousButton: {
