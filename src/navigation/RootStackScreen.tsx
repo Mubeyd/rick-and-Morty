@@ -56,4 +56,4 @@ const RootStackScreen = () => (
   </NavigationContainer>
 )
 
-export default RootStackScreen
+export default React.memo(RootStackScreen)
