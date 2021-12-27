@@ -5,6 +5,8 @@ import {
   Alert,
   FlatList,
   Image,
+  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -81,40 +83,49 @@ const CharacterDetailsScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.characterName}>{character.name}</Text>
-      <View style={styles.imageView}>
-        <Image style={styles.image} source={{ uri: character.image }} />
-      </View>
-
-      <View style={styles.textView}>
-        <Text style={styles.rowText}>Status: </Text>
-        <Text style={styles.rowText}>{character.status}</Text>
-      </View>
-      <View style={styles.textView}>
-        <Text style={styles.rowText}>Gender: </Text>
-        <Text style={styles.rowText}>{character.gender}</Text>
-      </View>
-      <View style={styles.textView}>
-        <Text style={styles.rowText}>Species: </Text>
-        <Text style={styles.rowText}>{character.species}</Text>
-      </View>
-
-      <Text style={styles.flatListTitle}>Episodes Appeared</Text>
-
-      {episodesLoading ? (
-        <ActivityIndicator size="large" />
-      ) : (
-        <View style={styles.flatListView}>
-          <FlatList
-            data={episodes}
-            keyExtractor={keyExtractor}
-            renderItem={renderItem}
-            numColumns={1}
-          />
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={{ flex: 1 }}>
+        <Text style={styles.characterName}>{character.name}</Text>
+        <View style={styles.imageView}>
+          <Image style={styles.image} source={{ uri: character.image }} />
         </View>
-      )}
-    </View>
+
+        <View style={styles.textView}>
+          <Text style={styles.rowText}>Status: </Text>
+          <Text style={styles.rowText}>{character.status}</Text>
+        </View>
+        <View style={styles.textView}>
+          <Text style={styles.rowText}>Species: </Text>
+          <Text style={styles.rowText}>{character.species}</Text>
+        </View>
+        <View style={styles.textView}>
+          <Text style={styles.rowText}>Gender: </Text>
+          <Text style={styles.rowText}>{character.gender}</Text>
+        </View>
+        <View style={styles.textView}>
+          <Text style={styles.rowText}>Type: </Text>
+          <Text style={styles.rowText}>
+            {character.type.trim() !== '' ? character.type : '...'}
+          </Text>
+        </View>
+
+        <Text style={styles.flatListTitle}>Episodes Appeared</Text>
+
+        {episodesLoading ? (
+          <ActivityIndicator size="large" />
+        ) : (
+          <View style={styles.flatListView}>
+            <FlatList
+              data={episodes}
+              keyExtractor={keyExtractor}
+              renderItem={renderItem}
+              numColumns={1}
+              nestedScrollEnabled
+            />
+          </View>
+        )}
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -165,11 +176,11 @@ const styles = StyleSheet.create({
   },
   flatListView: {
     alignItems: 'center',
-    height: screenHeight / 2.68,
+    maxHeight: screenHeight / 2.68,
+    minHeight: 48,
     width: screenWidth / 1.6,
     backgroundColor: palette.background,
     alignSelf: 'center',
-    borderRadius: 4
-
+    borderRadius: 4,
   },
 })

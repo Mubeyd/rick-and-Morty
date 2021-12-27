@@ -36,7 +36,7 @@ const RootStackScreen = () => (
         name="CharacterDetailsScreen"
         component={CharacterDetailsScreen}
         options={{
-          title: 'Episode details screen',
+          title: 'Character details screen',
           headerTitleStyle: {color: palette.text.secondary},
           headerShown: true,
           headerRight: () => (
