@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native'
 import Character from '../components/Character'
+import { palette } from '../constants/colors'
 import { screenHeight } from '../constants/sizes'
 import { ICharacter } from '../interfaces/ICharacter'
 import { IEpisode } from '../interfaces/IEpisode'
@@ -83,10 +84,6 @@ const EpisodeDetailsScreen = () => {
   if (isLoading) {
     return <ActivityIndicator size="large" />
   }
-  console.log(
-    'characters :>> ',
-    characters.map((x) => x.name),
-  )
   return (
     <View style={styles.container}>
       <View style={styles.detailsView}>
@@ -137,7 +134,7 @@ export default React.memo(EpisodeDetailsScreen)
 
 const styles = StyleSheet.create({
   rowText: {
-    color: '#000',
+    color: palette.text.primary,
     fontSize: 14,
     margin: 4,
   },

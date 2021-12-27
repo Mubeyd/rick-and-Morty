@@ -11,7 +11,7 @@ import {
 import { Searchbar } from 'react-native-paper'
 import Divider from '../components/Divider'
 import Episode from '../components/Episode'
-import { backgroundColor } from '../constants/colors'
+import { backgroundColor, palette } from '../constants/colors'
 import { episodeApi } from '../constants/constants'
 import { screenHeight, screenWidth } from '../constants/sizes'
 import { IEpisode } from '../interfaces/IEpisode'
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 18,
-    color: '#000',
+    color: palette.text.primary,
   },
   activityIndicator: {
     height: screenHeight / 1.4,

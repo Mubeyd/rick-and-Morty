@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { palette } from '../constants/colors'
 import { screenWidth } from '../constants/sizes'
 import { IEpisode } from '../interfaces/IEpisode'
 
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     width: screenWidth / 1.2,
-    backgroundColor: '#CCE4FF',
+    backgroundColor: palette.primary.subtle,
     borderRadius: 4,
     marginVertical: 4,
     alignItems: 'center',
@@ -48,12 +49,12 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 14,
     margin: 2,
-    color: '#363738',
+    color: palette.text.primary,
   },
   episodeId: {
     fontSize: 14,
     // margin: 2,
-    color: '#363738',
+    color: palette.text.primary,
   },
   air_date: {
     fontSize: 14,

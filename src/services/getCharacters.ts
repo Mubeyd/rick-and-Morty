@@ -3,7 +3,7 @@ import { ICharacter } from '../interfaces/ICharacter'
 export const getCharacters = async (
   _characters: string[],
   fn: (items: ICharacter[]) => void,
-  onCatch: () => void,
+  onCatch: (e: any) => void,
 ) => {
   await Promise.all(_characters)
     .then((values) => {
@@ -16,11 +16,8 @@ export const getCharacters = async (
     })
     .then((resArray) => {
       fn(resArray)
-    //   setCharacters(resArray)
-    //   setCharactersLoading(false)
     })
-    .catch((e) => {
-      onCatch()
-    //   createTwoButtonAlert()
+    .catch((e: any) => {
+      onCatch(e)
     })
 }
