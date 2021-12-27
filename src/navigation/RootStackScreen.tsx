@@ -2,7 +2,9 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 import { View } from 'react-native'
+import Fontisto from 'react-native-vector-icons/Fontisto'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import CharacterDetailsScreen from '../screens/CharacterDetailsScreen'
 import EpisodeDetailsScreen from '../screens/EpisodeDetailsScreen'
 import MainScreen from '../screens/MainScreen'
 
@@ -19,7 +21,20 @@ const RootStackScreen = () => (
           headerShown: true,
           headerRight: () => (
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-             <MaterialCommunityIcons name="movie-filter" size={28} />
+             <MaterialCommunityIcons name="movie-filter" size={26} />
+            </View>
+          ),
+        }}
+      />
+      <RootStack.Screen
+        name="CharacterDetailsScreen"
+        component={CharacterDetailsScreen}
+        options={{
+          title: 'Episode details screen',
+          headerShown: true,
+          headerRight: () => (
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+             <Fontisto name="person" size={26} />
             </View>
           ),
         }}
