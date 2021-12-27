@@ -100,7 +100,7 @@ const EpisodeDetailsScreen = () => {
         <View style={styles.textView}>
           <Text style={styles.rowText}>Air Date: </Text>
           <Text style={styles.rowText}>
-            {moment(episode.air_date).format('MMM Do YY')}
+            {episode.air_date}
           </Text>
         </View>
         <View style={styles.textView}>
@@ -161,6 +161,16 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     textAlign: 'center',
     letterSpacing: -0.3,
+  },
+  charactersTitleText: {
+    fontFamily: 'Montserrat',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 25,
+    lineHeight: 30,
+    textAlign: 'center',
+    letterSpacing: -0.3,
+    color: palette.text.secondary
   },
   headerView: {
     marginVertical: 4,
