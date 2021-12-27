@@ -149,6 +149,8 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 18,
     color: palette.text.primary,
+    margin: 4,
+    textAlign: 'center',
   },
   activityIndicator: {
     height: screenHeight / 1.4,

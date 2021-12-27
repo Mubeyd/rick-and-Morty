@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
     margin: 6,
     borderRadius: 4,
     padding: 4,
+    elevation: 2,
   },
   headerText: {
     fontFamily: 'Montserrat',

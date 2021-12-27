@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native'
 import { palette } from '../constants/colors'
-import { screenHeight } from '../constants/sizes'
+import { screenHeight, screenWidth } from '../constants/sizes'
 import { ICharacter } from '../interfaces/ICharacter'
 import { IEpisode } from '../interfaces/IEpisode'
 import { getEpisodes } from '../services/getEpisodes'
@@ -134,8 +134,10 @@ const styles = StyleSheet.create({
   },
   imageView: {
     height: 164,
-    margin: 24,
+    margin: 20,
     alignSelf: 'center',
+    borderWidth: 2,
+    borderColor: palette.secondary.subtle,
   },
   characterName: {
     fontSize: 18,
@@ -164,5 +166,10 @@ const styles = StyleSheet.create({
   flatListView: {
     alignItems: 'center',
     height: screenHeight / 2.68,
+    width: screenWidth / 1.6,
+    backgroundColor: palette.background,
+    alignSelf: 'center',
+    borderRadius: 4
+
   },
 })

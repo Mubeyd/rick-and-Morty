@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginVertical: 4,
     alignItems: 'center',
+    elevation: 2,
   },
   name: {
     fontSize: 14,
