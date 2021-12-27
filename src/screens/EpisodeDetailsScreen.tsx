@@ -1,4 +1,4 @@
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import moment from 'moment'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
@@ -17,15 +17,17 @@ import { getCharacters } from '../services/getCharacters'
 
 const EpisodeDetailsScreen = () => {
   const { params, name, key } = useRoute()
+  const { navigate } = useNavigation()
+
 
   const [isLoading, setLoading] = useState(true)
   const [charactersLoading, setCharactersLoading] = useState(true)
   const [characters, setCharacters] = useState<ICharacter[]>([])
 
-  const item = useMemo(() => params?.item as IEpisode, [params])
+  const episode = useMemo(() => params?.item as IEpisode, [params])
 
   const onPress = useCallback((item: ICharacter) => {
-    // navigate('EpisodeDetailsScreen' as never, { item: item })
+    navigate('CharacterDetailsScreen' as never, { item: item })
   }, [])
 
   const keyExtractor = useCallback((item: ICharacter) => item.id.toString(), [])
@@ -47,7 +49,7 @@ const EpisodeDetailsScreen = () => {
         text: 'Refresh',
         onPress: () => {
           getCharacters(
-            item.characters,
+            episode.characters,
             (items) => {
               setCharacters(items)
               setCharactersLoading(false)
@@ -59,10 +61,10 @@ const EpisodeDetailsScreen = () => {
     ])
 
   useEffect(() => {
-    if (!!item) {
-      if (item.characters.length > 0) {
+    if (!!episode) {
+      if (episode.characters.length > 0) {
         getCharacters(
-          item.characters,
+          episode.characters,
           (items) => {
             setCharacters(items)
             setCharactersLoading(false)
@@ -76,7 +78,7 @@ const EpisodeDetailsScreen = () => {
     ;() => {
       setCharacters([])
     }
-  }, [item.characters])
+  }, [episode.characters])
 
   if (isLoading) {
     return <ActivityIndicator size="large" />
@@ -90,24 +92,24 @@ const EpisodeDetailsScreen = () => {
       <View style={styles.detailsView}>
         <View style={styles.textView}>
           <Text style={styles.rowText}>Episode Number: </Text>
-          <Text style={styles.rowText}>{item.id}</Text>
+          <Text style={styles.rowText}>{episode.id}</Text>
         </View>
 
         <View style={styles.textView}>
           <Text style={styles.rowText}>Episode Name: </Text>
-          <Text style={styles.rowText}>{item.name}</Text>
+          <Text style={styles.rowText}>{episode.name}</Text>
         </View>
 
         <View style={styles.textView}>
           <Text style={styles.rowText}>Air Date: </Text>
           <Text style={styles.rowText}>
-            {moment(item.air_date).format('MMM Do YY')}
+            {moment(episode.air_date).format('MMM Do YY')}
           </Text>
         </View>
         <View style={styles.textView}>
           <Text style={styles.rowText}>Created At: </Text>
           <Text style={styles.rowText}>
-            {moment(item.created).format('MMM Do YY')}
+            {moment(episode.created).format('MMM Do YY')}
           </Text>
         </View>
       </View>
