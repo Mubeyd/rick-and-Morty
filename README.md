@@ -27,10 +27,11 @@ cd rick-and-Morty
 yarn;
 
 
+
+
 ### 2. Start your app
 
 ```
-
 # Build the app on Android
 
 yarn android;
