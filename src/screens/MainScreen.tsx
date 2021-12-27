@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native'
 import { Searchbar } from 'react-native-paper'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Divider from '../components/Divider'
 import Episode from '../components/Episode'
 import { backgroundColor, palette } from '../constants/colors'
@@ -80,7 +81,14 @@ const MainScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.headerView}>
-        <Text style={styles.headerText}>Rick Morty Episodes List</Text>
+        <View style={styles.headerTitleView}>
+          <MaterialIcons
+            name="science"
+            size={18}
+            color={palette.text.primary}
+          />
+          <Text style={styles.headerText}>Rick Morty Episodes List</Text>
+        </View>
         <Searchbar
           placeholder="Search"
           onChangeText={onChangeSearch}
@@ -107,10 +115,20 @@ const MainScreen = () => {
 
       <View style={styles.bottomView}>
         <View style={styles.previousButton}>
-          <Button title="Previous" disabled={!info?.prev} onPress={onPrev} />
+          <Button
+            title="Previous"
+            disabled={!info?.prev}
+            onPress={onPrev}
+            color={palette.primary.main}
+          />
         </View>
         <View style={styles.nextButton}>
-          <Button title="Next" disabled={!info?.next} onPress={onNext} />
+          <Button
+            title="Next"
+            disabled={!info?.next}
+            onPress={onNext}
+            color={palette.primary.main}
+          />
         </View>
       </View>
     </View>
@@ -158,5 +176,10 @@ const styles = StyleSheet.create({
   flatListView: {
     height: screenHeight / 1.4,
     position: 'relative',
+  },
+  headerTitleView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })
