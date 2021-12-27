@@ -94,7 +94,7 @@ const MainScreen = () => {
           <ActivityIndicator size="large" />
         </View>
       ) : (
-        <View style={{ height: screenHeight / 1.4, position: 'relative' }}>
+        <View style={styles.flatListView}>
           <FlatList
             data={data}
             keyExtractor={keyExtractor}
@@ -151,6 +151,10 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   activityIndicator: {
-    margin: 48,
+    height: screenHeight / 1.4,
+  },
+  flatListView: {
+    height: screenHeight / 1.4,
+    position: 'relative',
   },
 })
