@@ -26,7 +26,7 @@ const RootStackScreen = () => (
               <MaterialCommunityIcons
                 name="movie-filter"
                 size={26}
-                color={palette.primary.light}
+                color={palette.primary.main}
               />
             </View>
           ),
@@ -41,7 +41,7 @@ const RootStackScreen = () => (
           headerShown: true,
           headerRight: () => (
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-              <Fontisto name="person" size={26} color={palette.primary.light} />
+              <Fontisto name="person" size={26} color={palette.primary.main} />
             </View>
           ),
         }}

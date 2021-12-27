@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { palette } from '../constants/colors'
 import { screenHeight, screenWidth } from '../constants/sizes'
 import { ICharacter } from '../interfaces/ICharacter'
 
@@ -20,7 +21,7 @@ const Character = (props: Props) => {
       activeOpacity={0.7}
       onPress={onPressCb}>
       <View>
-        <Text>{item.name}</Text>
+        <Text style={styles.text}>{item.name}</Text>
         <Text>{item.species}</Text>
       </View>
     </TouchableOpacity>
@@ -38,4 +39,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     height: screenHeight / 10,
   },
+  text: {
+    color: palette.text.secondary
+  }
 })

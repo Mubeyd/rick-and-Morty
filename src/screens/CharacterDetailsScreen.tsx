@@ -30,8 +30,8 @@ const CharacterDetailsScreen = () => {
   const renderItem = useCallback(({ item }: { item: IEpisode }) => {
     return (
       <View style={{ margin: 4, flexDirection: 'row' }}>
-        <Text>{item.id} - </Text>
-        <Text>{item.name}</Text>
+        <Text style={styles.text}>{item.id} - </Text>
+        <Text style={styles.text}>{item.name}</Text>
       </View>
     )
   }, [])
@@ -183,4 +183,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 4,
   },
+  text: {
+    color: palette.text.secondary
+  }
 })
