@@ -25,9 +25,7 @@ git clone https://github.com/Mubeyd/rick-and-Morty
 cd rick-and-Morty
 # Install npm dependencies
 yarn;
-
-
-
+```
 
 ### 2. Start your app
 
@@ -40,7 +38,7 @@ yarn android;
 
 yarn start
 
+
 ```
 
 Follow the instructions from the terminal to preview the app on your phone or using an emulator.
-```
