@@ -3,48 +3,88 @@ import moment from 'moment'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   ActivityIndicator,
+  Alert,
   FlatList,
   StyleSheet,
   Text,
   View,
 } from 'react-native'
+import Character from '../components/Character'
+import { screenHeight } from '../constants/sizes'
+import { ICharacter } from '../interfaces/ICharacter'
 import { IEpisode } from '../interfaces/IEpisode'
+import { getCharacters } from '../services/getCharacters'
 
 const EpisodeDetailsScreen = () => {
   const { params, name, key } = useRoute()
 
   const [isLoading, setLoading] = useState(true)
+  const [charactersLoading, setCharactersLoading] = useState(true)
+  const [characters, setCharacters] = useState<ICharacter[]>([])
 
   const item = useMemo(() => params?.item as IEpisode, [params])
 
-  console.log('item :>> ', item)
-  console.log('name :>> ', name)
-  console.log('key :>> ', key)
-
-  const data = useMemo(() => item.characters, [item.characters])
-  const onPress = useCallback((item: any) => {
+  const onPress = useCallback((item: ICharacter) => {
     // navigate('EpisodeDetailsScreen' as never, { item: item })
   }, [])
 
-  const keyExtractor = useCallback((item) => item, [])
+  const keyExtractor = useCallback((item: ICharacter) => item.id.toString(), [])
   const renderItem = useCallback(
-    ({ item }: { item: string }) => (
-      <View>
-        <Text>{item}</Text>
-      </View>
-    ),
+    ({ item }: { item: ICharacter }) => {
+      return <Character item={item} onPress={onPress} />
+    },
     [onPress],
   )
 
+  const createTwoButtonAlert = () =>
+    Alert.alert('Error', 'Network failed', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {
+        text: 'Refresh',
+        onPress: () => {
+          getCharacters(
+            item.characters,
+            (items) => {
+              setCharacters(items)
+              setCharactersLoading(false)
+            },
+            () => createTwoButtonAlert(),
+          )
+        },
+      },
+    ])
+
   useEffect(() => {
     if (!!item) {
+      if (item.characters.length > 0) {
+        getCharacters(
+          item.characters,
+          (items) => {
+            setCharacters(items)
+            setCharactersLoading(false)
+          },
+          () => createTwoButtonAlert(),
+        )
+      }
+
       setLoading(false)
     }
-  }, [])
+    ;() => {
+      setCharacters([])
+    }
+  }, [item.characters])
 
   if (isLoading) {
     return <ActivityIndicator size="large" />
   }
+  console.log(
+    'characters :>> ',
+    characters.map((x) => x.name),
+  )
   return (
     <View style={styles.container}>
       <View style={styles.detailsView}>
@@ -72,12 +112,20 @@ const EpisodeDetailsScreen = () => {
         </View>
       </View>
 
-      <View>
-        <FlatList
-          data={data}
-          keyExtractor={keyExtractor}
-          renderItem={renderItem}
-        />
+      <View style={styles.charactersListView}>
+        <View style={styles.headerView}>
+          <Text style={styles.headerText}>Characters List</Text>
+        </View>
+        {charactersLoading ? (
+          <ActivityIndicator size="large" />
+        ) : (
+          <FlatList
+            data={characters}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+            numColumns={2}
+          />
+        )}
       </View>
     </View>
   )
@@ -104,5 +152,23 @@ const styles = StyleSheet.create({
     margin: 6,
     borderRadius: 4,
     padding: 4,
+  },
+  headerText: {
+    fontFamily: 'Montserrat',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 25,
+    lineHeight: 30,
+    textAlign: 'center',
+    letterSpacing: -0.3,
+  },
+  headerView: {
+    marginVertical: 4,
+  },
+  charactersListView: {
+    margin: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: screenHeight / 1.42,
   },
 })

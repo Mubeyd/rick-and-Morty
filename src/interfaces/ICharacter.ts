@@ -16,5 +16,5 @@ export interface ICharacter {
   image: string
   episode: string[]
   url: string
-  created: Date
+  created: string
 }
